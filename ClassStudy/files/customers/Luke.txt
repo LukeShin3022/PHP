@@ -1,0 +1,8 @@
+product:Chips
+price:2
+quantity:4
+total:8
+product:Tomato
+price:6
+quantity:6
+total:36

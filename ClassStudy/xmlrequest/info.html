@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        <input type="text" name="fname" id="fname">
+        <input type="text" name="lname" id="lname">
+        <button type="button" onclick="sendInfo()">Submit Get</button>
+        <button type="button" onclick="sendInfo_post()">Submit Post</button>
+    </form>
+    <h1 id="output"></h1>
+</body>
+<script>
+    // sendInfo();
+    function sendInfo(){
+        let fname = document.getElementById("fname").value;
+        let lname = document.getElementById("lname").value;
+        // alert("you have submitted the form"+fname+" "+lname);
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+                console.log(xmlhttp);
+            // if(this.status == 200){
+            if(this.readyState == 4 && this.status == 200){
+
+                // console.log(this.responseText);
+                document.getElementById('output').innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","./getInfo.php?fname="+fname+"&lname="+lname);
+        xmlhttp.send();
+    }
+    function sendInfo_post(){
+        let fname = document.getElementById("fname").value;
+        let lname = document.getElementById("lname").value;
+        let f_Data = new FormData();
+        f_Data.append('fname',fname);
+        f_Data.append('lname',lname);
+        // console.log(f_Data);
+
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+            // if(this.readyState == 4 && this.status == 200){
+                console.log(xmlhttp);
+            // if(this.status == 200){
+            if(this.readyState == 4 && this.status == 200){
+                let user = JSON.parse(this.responseText);
+                // console.log(this.responseText);
+                // document.getElementById('output').innerHTML = this.responseText;
+                document.getElementById('output').innerHTML = user.fname+" "+user.lname;
+
+                // document.getElementById('output').innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open('POST','./getInfo.php',true);
+        xmlhttp.send(f_Data);
+    }
+</script>
+</html>

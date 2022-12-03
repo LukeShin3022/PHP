@@ -1,0 +1,4 @@
+Create a table using the given codes. In the table display the user information with previous desire.
+The table headers should be:
+FirstName, LastName, Previous Desire
+Upload just a screen shot of the codes you have added. Naming convention: Fname_PHPCW2.jpg
